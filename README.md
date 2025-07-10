@@ -5,6 +5,6 @@ Adicionar:
 
 Os dados (arquivos .txt) devem ser adicionados na pasta 'trabalho-2/questoes/data/questao_1'
 
-``bash
+```bash
     python3 trabalho-2/questoes/src/scripts/questao_726798-A.py
-``
+```
