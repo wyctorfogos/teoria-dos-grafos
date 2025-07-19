@@ -8,6 +8,20 @@ def preprocessing_data(data_context: str):
     a = list(map(int, lines[1].split()))
     return n, t, a
 
+def verifyCondition(n, m):
+    ''''
+        Verificar a conexidade do grafo, pois o problema pode ser representado como um grafo completamente conexo
+    '''
+    if ((n<0) or (n>100)):
+        print("O 'n' está além dos limites!\n")
+        return False
+    # Verificação 
+    if ((m<0) and (m>((n*(n-1))/2))):
+        print("O 'm' está além dos limites!\n")
+        return False
+    return True
+
+
 def can_reach_target(n, t, a):
     pos = 1
     while pos < t:
