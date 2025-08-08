@@ -1,6 +1,9 @@
-def load_text_content(file_path):
-    with open(file_path, 'r') as f:
-        return f.read()
+##  Wyctor Fogos da Rocha ##
+import sys
+
+def load_text_content():
+    ## Carregamento dos dados via stdin
+    return sys.stdin.read()
 
 def preprocessing_data(data_context: str):
     lines = data_context.strip().split("\n")
@@ -29,8 +32,7 @@ def can_reach_target(n, t, a):
     return "YES" if pos == t else "NO"
 
 if __name__ == "__main__":
-    file_path = "./trabalho-2/questoes/data/questao_2/input_1.txt"
-    raw_data = load_text_content(file_path)
+    raw_data = load_text_content()
     n, t, a = preprocessing_data(raw_data)
     result = can_reach_target(n, t, a)
-    print(result)
+    sys.stdout.write(str(result) + '\n')

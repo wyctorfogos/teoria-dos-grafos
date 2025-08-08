@@ -1,12 +1,10 @@
+##  Wyctor Fogos da Rocha ##
 from collections import defaultdict
-import os
+import sys
 
-def load_text_content(data_file_dir_path: str):
-    try:
-        with open(data_file_dir_path, 'r') as file:
-            return file.read()
-    except Exception as e:
-        raise e
+def load_text_content():
+    ## Carregamento dos dados via stdin
+    return sys.stdin.read()
 
 def verifyCondition(n, m):
     ''''
@@ -53,18 +51,11 @@ def students_and_shoelaces(n, m, edges):
         rounds += 1
     return rounds
 
-if __name__ == "__main__":
-    list_of_inputs = ["input_1.txt", "input_2.txt", "input_3.txt"]
-    data_file_path = "./trabalho-2/questoes/data/questao_1"
-        
-    for input_name in list_of_inputs:
-        # 1. Carrega o conteúdo do arquivo
-        raw_data = load_text_content(os.path.join(data_file_path, input_name))
-        
-        # 2. Processa os dados (usa sua função de preprocessing)
-        n, m, edges = preprocessing_data(raw_data)
-        
-        # 3. Executa a lógica principal
-        result = students_and_shoelaces(n, m, edges)
-        
-        print(result)
+if __name__ == "__main__":       
+    raw_data = load_text_content()
+    # Preprocessamento
+    n, m, edges = preprocessing_data(raw_data)
+    
+    result = students_and_shoelaces(n, m, edges)
+
+    sys.stdout.write(str(result) + '\n')

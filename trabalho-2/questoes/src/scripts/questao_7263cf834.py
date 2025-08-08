@@ -1,35 +1,42 @@
-def bellman_ford(n, edges):
-    dist = [0] * n  # Pode começar com 0 pois queremos detectar ciclos, não distâncias reais
-    for _ in range(n - 1):
+##  Wyctor Fogos da Rocha ##
+import sys
+
+def bellmanford(n, edges):
+    """
+        Código do BellmanFord
+    """
+    try:    
+        # Tentar detectar ciclos inicialmente
+        dist = [0] * n  
+        for _ in range(n - 1):
+            for u, v, w in edges:
+                if dist[u] + w < dist[v]:
+                    dist[v] = dist[u] + w
+
+        # Verifica se ainda é possível relaxar (ou seja, existe ciclo negativo)
         for u, v, w in edges:
             if dist[u] + w < dist[v]:
-                dist[v] = dist[u] + w
-
-    # Verifica se ainda é possível relaxar (ou seja, existe ciclo negativo)
-    for u, v, w in edges:
-        if dist[u] + w < dist[v]:
-            return True  # ciclo negativo encontrado
-    return False
-
+                return True  # ciclo negativo encontrado
+        return False
+    except Exception as e:
+        raise ValueError(f"Erro: {e}\n")
+    
 def solve_cases(cases):
     results = []
     for n, m, wormholes in cases:
-        if bellman_ford(n, wormholes):
+        if bellmanford(n, wormholes):
             results.append("possible")
         else:
             results.append("not possible")
     return results
 
-def load_text_content(data_file_dir_path: str):
-    try:
-        with open(data_file_dir_path, 'r') as file:
-            return file.read()
-    except Exception as e:
-        raise e
+def load_text_content():
+    ## Carregamento dos dados via stdin
+    return sys.stdin.read()
 
 def main():
-    # Leitura de entrada (exemplo com os dados fornecidos)
-    input_text = load_text_content(data_file_dir_path="trabalho-2/questoes/data/questao_3/input.txt")
+    ## Pipeline do processamento dos dados
+    input_text = load_text_content()
     lines = input_text.strip().split('\n')
 
     index = 0
@@ -47,11 +54,12 @@ def main():
             index += 1
         cases.append((n, m, wormholes))
 
-    # Processa e imprime
+    ## Processa e imprime
+    # Processamento dos dados
     results = solve_cases(cases)
-    for res in results:
-        print(res)
-
+    for result in results:
+        sys.stdout.write(str(result) + '\n')
 
 if __name__=="__main__":
+    ## Leitura dos dados de entrada
     main()
