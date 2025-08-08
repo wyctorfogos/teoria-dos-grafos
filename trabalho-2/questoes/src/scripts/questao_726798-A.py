@@ -47,32 +47,35 @@ def students_and_shoelaces(n, m, arestas):
         Calcular o número de rodadas (grupos expulsos).
     """
         
-    adj = defaultdict(set)  # Lista de adjacência: estudante → conjunto de vizinhos
+    adj = defaultdict(set)  # Lista de adjacência
 
-    # Construção do grafo a partir das arestas
+    # Construção do grafo
     for a, b in arestas:
         adj[a].add(b)
         adj[b].add(a)
-
-    rounds = 0  # Contador de rodadas
+    
+    # Contador de rodadas
+    rounds = 0  
 
     while True:
         # Identifica estudantes com grau 1
-        to_remove = []
-        for node in adj:
-            if len(adj[node]) == 1: # Verifica se os vizinhos de 'node' tem tamanho igual a 1
-                to_remove.append(node) # Vou remover
+        vertice_to_remove = []
+        for vertice in adj:
+            # Verifica se os vizinhos de 'vertice' tem tamanho igual a 1
+            if len(adj[vertice]) == 1: 
+                vertice_to_remove.append(vertice) # Vou remover
 
-        if not to_remove:
-            break  # Não há mais quem expulsar
+        if not vertice_to_remove:
+            break
 
         # Remove os estudantes e atualiza as conexões dos vizinhos
-        for node in to_remove:
-            for neighbor in adj[node]:
-                adj[neighbor].discard(node)  # Remove a conexão inversa
-            del adj[node]  # Remove o estudante do grafo
-
-        rounds += 1  # Conta uma nova rodada
+        for vertice in vertice_to_remove:
+            for vizinho in adj[vertice]:
+                adj[vizinho].discard(vertice)  # Remove a conexão inversa
+            del adj[vertice]  # Remove o estudante do grafo
+        
+        # Conta uma rodada
+        rounds += 1 
 
     return rounds
 
