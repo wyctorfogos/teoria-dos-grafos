@@ -1,4 +1,4 @@
-##  Wyctor Fogos da Rocha ##
+#  Wyctor Fogos da Rocha #
 import sys
 
 def load_text_content():
@@ -12,9 +12,9 @@ def preprocessing_data(data_context: str):
     return n, t, a
 
 def verifyCondition(n, m):
-    ''''
-        Verificar a conexidade do grafo, pois o problema pode ser representado como um grafo completamente conexo
-    '''
+    """
+        Verificar a conexidade do grafo. O poblema pode ser representado como um grafo completamente conexo
+    """
     if ((n<0) or (n>100)):
         print("O 'n' está além dos limites!\n")
         return False
@@ -25,14 +25,17 @@ def verifyCondition(n, m):
     return True
 
 
-def can_reach_target(n, t, a):
+def tentativa_de_chegar(n, t, a):
+    """
+        Verifica a soma das posições do vetor de entrada e de 'a[i]'
+    """
     pos = 1
     while pos < t:
-        pos += a[pos - 1]  # a[0] é salto da célula 1
+        pos += a[pos - 1]
     return "YES" if pos == t else "NO"
 
 if __name__ == "__main__":
     raw_data = load_text_content()
     n, t, a = preprocessing_data(raw_data)
-    result = can_reach_target(n, t, a)
+    result = tentativa_de_chegar(n, t, a)
     sys.stdout.write(str(result) + '\n')
